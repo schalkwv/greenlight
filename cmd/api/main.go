@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"github.com/schalkwv/greenlight/internal/data"
+	"log"
+)
 
 /*
 docker run --name my-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mypassword -d postgres
@@ -34,6 +37,7 @@ type config struct {
 type application struct {
 	config config
 	logger *log.Logger
+	models data.Models
 }
 
 func main() {
@@ -61,6 +65,7 @@ func main() {
 	app := &application{
 		config: cfg,
 		logger: logger,
+		models: data.NewModels(db),
 	}
 
 	srv := &http.Server{
