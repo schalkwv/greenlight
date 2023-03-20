@@ -60,7 +60,7 @@ func main() {
 		logger.Fatal(err)
 	}
 	defer db.Close()
-	logger.Printf("database connection pool established")
+	logger.Printf("database connection pool established with %d max connections", cfg.db.maxOpenConns)
 
 	app := &application{
 		config: cfg,
